@@ -1,14 +1,11 @@
 import tkinter as tk
 from tkinter import ttk
 
-
-
 def set_values():
     txt1 = int(e1.get())
     txt2 = int(e2.get())
     txt3 = int(e3.get())
     print(convert(txt1, txt2, txt3))
-
 
 def graphic():
     window = tk.Tk()
@@ -37,8 +34,6 @@ def graphic():
     global e3
     e3 = tk.Entry(tab1, text="")
     e3.grid(column=1, row=2)
-    lbl4 = tk.Label(tab1, text="Результат:")
-    lbl4.grid(column=0, row=3)
     btn = tk.Button(tab1, text="OK", command=set_values)
     btn.grid(column=1, row=4)
     lblgroup = tk.Label(tab2,
@@ -73,4 +68,5 @@ def output():
 
 graphic()
 
-# output()
+
+#output()
