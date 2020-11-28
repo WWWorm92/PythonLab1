@@ -36,6 +36,8 @@ def graphic():
     e3.grid(column=1, row=2)
     btn = tk.Button(tab1, text="OK", command=set_values)
     btn.grid(column=1, row=4)
+    lbl4 = tk.Label(tab1, text="Результат:")
+    lbl4.grid(column=0, row=3)
     lblgroup = tk.Label(tab2,
                         text="Работу выполнили студенты группы 0307: \n Брывкин Даниил \n Верещагин Роман \n Обрезков "
                              "Егор")
