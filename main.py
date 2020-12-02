@@ -6,10 +6,8 @@ destroy = []
 
 def set_values(window):
     global res
-    txt1 = int(e1.get())
-    txt2 = int(e2.get())
-    txt3 = int(e3.get())
-    res = convert(txt1, txt2, txt3)
+    n = int(e1.get())
+    res = alg(n)
     graphic(window)
 
 
@@ -35,21 +33,6 @@ def graphic(window):
     e1 = tk.Entry(tab1, text="")
     destroy_objects.append(e1)
     e1.grid(column=1, row=0)
-    # txt1 = e1.get()
-    lbl2 = tk.Label(tab1, text="В какую СС:")
-    destroy_objects.append(lbl2)
-    lbl2.grid(column=0, row=1)
-    global e2
-    e2 = tk.Entry(tab1, text="")
-    destroy_objects.append(e2)
-    e2.grid(column=1, row=1)
-    lbl3 = tk.Label(tab1, text="Из какой СС:")
-    destroy_objects.append(lbl3)
-    lbl3.grid(column=0, row=2)
-    global e3
-    e3 = tk.Entry(tab1, text="")
-    destroy_objects.append(e3)
-    e3.grid(column=1, row=2)
     btn = tk.Button(tab1, text="OK", command=lambda: set_values(window))
     destroy_objects.append(btn)
     btn.grid(column=1, row=4)
@@ -64,7 +47,6 @@ def graphic(window):
                              "Егор")
     lblgroup.grid(column=0, row=8)
     tab_control.pack(expand=1, fill='both')
-    # print(txt1)
     window.mainloop()
 
 
@@ -82,11 +64,72 @@ def convert(num, to_base=10, from_base=10):
         return convert(n // to_base, to_base) + alphabet[n % to_base]
 
 
-def output():
-    number = int(input("Число:"))
-    to_ = int(input("Основание новой СС:"))
-    from_ = int(input("Основание старой СС:"))
-    print(convert(number, to_, from_))
+def periodconvert(perstr):
+    P = 6
+    perLen = len(perstr)
+    chisl = int(convert(perstr, 10, 6))
+    perstr = chisl / (P ** perLen - 1)
+    return str(perstr)
+
+
+def fibo(x):
+    global FIB
+    FIB = [1, 2]
+    temp = 1
+    while FIB[temp - 1] + FIB[temp] <= x:
+        FIB.append(FIB[temp - 1] + FIB[temp])
+        temp += 1
+    return FIB
+
+
+def transfib(x):
+    global FIB
+    resstr = ''
+    for i in FIB[::-1]:
+        if x >= i:
+            x -= i
+            resstr += '1'
+        else:
+            resstr += '0'
+    return resstr
+
+
+def alg(n):
+    List = [12, 16, 20, 10, 12, 10]
+    for i in range(len(List)):
+        List[i] = convert(List[i], 6, 10)
+
+    part1 = ''.join(List[:3])
+    part2 = ''.join(List[3:])
+
+    part1 = int(part1)
+    fibo(part1)
+    part1 = transfib(part1)
+    part2 = periodconvert(part2)
+    part2 = int(part2[2:])
+    fibo(part2)
+    part2 = transfib(part2)
+    respart = part2 + part1
+    outputstr = ''
+    for i in range(n):
+        outputstr += respart[i % len(respart)]
+    return outputstr
+
+
+# flag = 0
+# while flag == 0:
+#     try:
+#         print("Введите количество знаков для шифра")
+#         n = int(input())
+#     except ValueError:
+#         print("Вы ввели неккоректное значение")
+#         flag = 0
+#     except RuntimeError:
+#         print("Непредвиденная ошибка")
+#         flag = 0
+#     else:
+#         flag = 1
+# print(alg(n))
 
 
 destroy_objects = []
@@ -96,5 +139,3 @@ window.title("Лабораторная работа №1")
 window.geometry('400x200')
 window.resizable(width=False, height=False)
 graphic(window)
-
-# output()
