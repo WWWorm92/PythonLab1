@@ -56,7 +56,7 @@ def graphic(window):
     lbl4 = tk.Label(tab1, text="Результат:")
     destroy_objects.append(lbl4)
     lbl4.grid(column=0, row=3)
-    lbl5 = tk.Label(tab1, text=res)
+    lbl5 = tk.Label(tab1, font="Arial 10", text=res)
     destroy_objects.append(lbl5)
     lbl5.grid(column=1, row=3, columnspan=9998)
     lblgroup = tk.Label(tab2,
@@ -115,10 +115,8 @@ def alg(n):
     List = [12, 16, 20, 10, 12, 10]
     for i in range(len(List)):
         List[i] = convert(List[i], 6, 10)
-
     part1 = ''.join(List[:3])
     part2 = ''.join(List[3:])
-
     part1 = int(part1)
     fibo(part1)
     part1 = transfib(part1)
@@ -133,10 +131,11 @@ def alg(n):
     return outputstr
 
 
+# Код,формирующий графическое окно
 destroy_objects = []
 res = ''
 window = tk.Tk()
 window.title("Лабораторная работа №1")
-window.geometry('400x200')
+window.geometry('450x250')
 window.resizable(width=False, height=False)
 graphic(window)
