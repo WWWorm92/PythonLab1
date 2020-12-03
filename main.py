@@ -1,14 +1,31 @@
 import tkinter as tk
+import tkinter.messagebox as mb
 from tkinter import ttk
 
 destroy = []
 
 
 def set_values(window):
-    global res
-    n = int(e1.get())
-    res = alg(n)
-    graphic(window)
+    global res, destroy_objects
+    flag = 0
+    while flag == 0:
+        try:
+            n = int(e1.get())
+            res = alg(n)
+            graphic(window)
+        except ValueError:
+            msg = "Неверное значение"
+            mb.showwarning("Информация", msg)
+            graphic(window)
+            flag = 0
+        except RuntimeError:
+            msg = "Непредвиденная ошибка"
+            mb.showerror("Информация", msg)
+            graphic(window)
+            flag = 0
+        else:
+            flag = 1
+        break
 
 
 def graphic(window):
@@ -35,13 +52,13 @@ def graphic(window):
     e1.grid(column=1, row=0)
     btn = tk.Button(tab1, text="OK", command=lambda: set_values(window))
     destroy_objects.append(btn)
-    btn.grid(column=1, row=4)
+    btn.grid(column=1, row=4, columnspan=1)
     lbl4 = tk.Label(tab1, text="Результат:")
     destroy_objects.append(lbl4)
     lbl4.grid(column=0, row=3)
     lbl5 = tk.Label(tab1, text=res)
     destroy_objects.append(lbl5)
-    lbl5.grid(column=1, row=3)
+    lbl5.grid(column=1, row=3, columnspan=9998)
     lblgroup = tk.Label(tab2,
                         text="Работу выполнили студенты группы 0307: \n Брывкин Даниил \n Верещагин Роман \n Обрезков "
                              "Егор")
@@ -114,22 +131,6 @@ def alg(n):
     for i in range(n):
         outputstr += respart[i % len(respart)]
     return outputstr
-
-
-# flag = 0
-# while flag == 0:
-#     try:
-#         print("Введите количество знаков для шифра")
-#         n = int(input())
-#     except ValueError:
-#         print("Вы ввели неккоректное значение")
-#         flag = 0
-#     except RuntimeError:
-#         print("Непредвиденная ошибка")
-#         flag = 0
-#     else:
-#         flag = 1
-# print(alg(n))
 
 
 destroy_objects = []
