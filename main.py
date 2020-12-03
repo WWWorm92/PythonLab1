@@ -90,17 +90,11 @@ def periodconvert(perstr):
 
 
 def fibo(x):
-    global FIB
     FIB = [1, 2]
     temp = 1
     while FIB[temp - 1] + FIB[temp] <= x:
         FIB.append(FIB[temp - 1] + FIB[temp])
         temp += 1
-    return FIB
-
-
-def transfib(x):
-    global FIB
     resstr = ''
     for i in FIB[::-1]:
         if x >= i:
@@ -118,12 +112,10 @@ def alg(n):
     part1 = ''.join(List[:3])
     part2 = ''.join(List[3:])
     part1 = int(part1)
-    fibo(part1)
-    part1 = transfib(part1)
+    part1 = fibo(part1)
     part2 = periodconvert(part2)
     part2 = int(part2[2:])
-    fibo(part2)
-    part2 = transfib(part2)
+    part2 = fibo(part2)
     respart = part2 + part1
     outputstr = ''
     for i in range(n):
